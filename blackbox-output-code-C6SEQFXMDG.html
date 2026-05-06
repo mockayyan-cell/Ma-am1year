@@ -1,0 +1,435 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Happy 1st Year Ma'am! 💖</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap');
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(-45deg, #ff9a9e, #fecfef, #a8edea, #fed6e3);
+            background-size: 400% 400%;
+            animation: gradientShift 12s ease infinite;
+            height: 100vh;
+            overflow: hidden;
+            position: relative;
+        }
+
+        @keyframes gradientShift {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        .page {
+            position: absolute;
+            width: 100%;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 1s ease;
+        }
+
+        .page.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .floating-hearts {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        .heart {
+            position: absolute;
+            font-size: 20px;
+            animation: floatHearts 8s infinite linear;
+            color: #ff69b4;
+        }
+
+        @keyframes floatHearts {
+            0% { transform: translateY(100vh) rotate(0deg); opacity: 0; }
+            10% { opacity: 1; }
+            90% { opacity: 1; }
+            100% { transform: translateY(-100px) rotate(360deg); opacity: 0; }
+        }
+
+        /* PAGE 1 - COUNTDOWN */
+        .countdown-container {
+            z-index: 10;
+        }
+
+        .countdown-number {
+            font-size: 12rem;
+            font-weight: 700;
+            background: linear-gradient(45deg, #ff6b9d, #c44569);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin: 2rem 0;
+            text-shadow: 0 0 40px rgba(255, 107, 157, 0.8);
+            animation: pulse 1s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+        }
+
+        .maam-text {
+            font-size: 2.5rem;
+            color: white;
+            margin-bottom: 3rem;
+            text-shadow: 0 4px 15px rgba(0,0,0,0.3);
+            animation: bounceIn 2s ease;
+        }
+
+        @keyframes bounceIn {
+            0% { transform: scale(0.3); opacity: 0; }
+            50% { transform: scale(1.05); }
+            70% { transform: scale(0.9); }
+            100% { transform: scale(1); opacity: 1; }
+        }
+
+        /* PAGE 2 - MESSAGES */
+        .messages-container {
+            max-width: 700px;
+            padding: 2rem;
+        }
+
+        .message-title {
+            font-size: 3.5rem;
+            font-weight: 700;
+            background: linear-gradient(45deg, #ff6b9d, #c44569);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 3rem;
+            animation: fadeInUp 1s ease;
+        }
+
+        .message-para {
+            font-size: 1.3rem;
+            color: white;
+            line-height: 1.8;
+            margin: 2rem 0;
+            padding: 2rem;
+            background: rgba(255,255,255,0.1);
+            border-radius: 20px;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255,255,255,0.2);
+            opacity: 0;
+            transform: translateY(50px);
+            transition: all 0.8s ease;
+        }
+
+        .message-para.animate {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* PAGE 3 - GIFT */
+        .gift-container {
+            z-index: 10;
+        }
+
+        .bear {
+            font-size: 8rem;
+            margin-bottom: 2rem;
+            animation: wiggle 2s infinite;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .bear:hover {
+            transform: scale(1.1);
+        }
+
+        @keyframes wiggle {
+            0%, 100% { transform: rotate(0deg); }
+            25% { transform: rotate(5deg); }
+            75% { transform: rotate(-5deg); }
+        }
+
+        .gift-box {
+            font-size: 10rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin: 2rem 0;
+            animation: bounce 2s infinite;
+        }
+
+        .gift-box:hover {
+            transform: scale(1.1);
+        }
+
+        .gift-open {
+            animation: openGift 1s ease;
+        }
+
+        @keyframes openGift {
+            0% { transform: scale(1) rotate(0deg); }
+            50% { transform: scale(1.2) rotate(10deg); }
+            100% { transform: scale(1.1) rotate(5deg); }
+        }
+
+        .cat-gift {
+            font-size: 6rem;
+            position: absolute;
+            opacity: 0;
+            transform: scale(0);
+            transition: all 1s ease;
+        }
+
+        .cat-gift.show {
+            opacity: 1;
+            transform: scale(1);
+            animation: catJump 1s ease;
+        }
+
+        @keyframes catJump {
+            0% { transform: translateY(100px) scale(0); }
+            50% { transform: translateY(-20px) scale(1.1); }
+            100% { transform: translateY(0) scale(1); }
+        }
+
+        .final-message {
+            font-size: 2rem;
+            color: white;
+            margin-top: 3rem;
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 1s ease 0.5s;
+        }
+
+        .final-message.show {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* BUTTONS */
+        .next-btn {
+            background: linear-gradient(45deg, #ff6b9d, #c44569);
+            border: none;
+            padding: 18px 50px;
+            font-size: 1.3rem;
+            font-weight: 600;
+            color: white;
+            border-radius: 50px;
+            cursor: pointer;
+            box-shadow: 0 15px 35px rgba(255, 107, 157, 0.4);
+            transition: all 0.3s ease;
+            font-family: 'Poppins', sans-serif;
+            margin-top: 3rem;
+        }
+
+        .next-btn:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 45px rgba(255, 107, 157, 0.6);
+        }
+
+        /* FIREWORKS */
+        .fireworks {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 20;
+        }
+
+        .firework {
+            position: absolute;
+            width: 10px;
+            height: 10px;
+            background: #ff69b4;
+            border-radius: 50%;
+            animation: fireworkExplode 2s ease-out forwards;
+        }
+
+        @keyframes fireworkExplode {
+            0% {
+                transform: scale(0);
+                opacity: 1;
+            }
+            100% {
+                transform: scale(20);
+                opacity: 0;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .countdown-number { font-size: 8rem; }
+            .maam-text { font-size: 2rem; }
+            .message-title { font-size: 2.5rem; }
+            .message-para { font-size: 1.1rem; padding: 1.5rem; }
+            .gift-box, .bear { font-size: 6rem; }
+        }
+    </style>
+</head>
+<body>
+    <!-- Floating Hearts Background -->
+    <div class="floating-hearts" id="hearts"></div>
+
+    <!-- PAGE 1: COUNTDOWN -->
+    <div class="page active" id="page1">
+        <div class="countdown-container">
+            <div class="countdown-number" id="countdown">10</div>
+            <div class="maam-text">Ma'am! 🎉</div>
+        </div>
+    </div>
+
+    <!-- PAGE 2: MESSAGES -->
+    <div class="page" id="page2">
+        <div class="messages-container">
+            <h1 class="message-title">Happy 1st Year of Our Friendship! 💕</h1>
+            <p class="message-para" id="msg1">
+                Ma'am, can you believe it's been a WHOLE YEAR since we became besties? 🥰 Every single day with you has been filled with laughter, late-night chats, and the kind of comfort that only comes from true friendship. You've been my rock, my cheerleader, and my partner-in-crime all in one!
+            </p>
+            <p class="message-para" id="msg2">
+                From our first "hello" to now, you've made my world so much brighter. Your silly jokes, your endless support, and the way you just GET me - it's all been magical. You're not just my bestie, you're family now! 💖
+            </p>
+            <p class="message-para" id="msg3">
+                Thank you for 365 days (and counting!) of being the most amazing person I know. Here's to many more years of adventures, secrets, and unstoppable fun together. You're irreplaceable, ma'am! 🌟
+            </p>
+            <p class="message-para" id="msg4">
+                I love how we can talk about anything and everything, how you always know when I need a hug (even through text!), and how you make ordinary moments feel special. You're my sunshine, ma'am! ☀️✨
+            </p>
+            <button class="next-btn" onclick="goToPage3()">Open Your Gift! 🎁</button>
+        </div>
+    </div>
+
+    <!-- PAGE 3: GIFT -->
+    <div class="page" id="page3">
+        <div class="gift-container">
+            <div class="bear" id="bear" title="Click me first! 🧸">ʕ•ᴥ•ʔ💕</div>
+            <div class="gift-box" id="giftBox" onclick="openGift()">🎁</div>
+            <div class="cat-gift" id="catGift">🐱💐</div>
+            <div class="final-message" id="finalMsg">This is for youuu, Ma'am! Happy 1st Year! 🥳💝</div>
+        </div>
+    </div>
+
+    <!-- Fireworks -->
+    <div class="fireworks" id="fireworks"></div>
+
+    <script>
+        let currentPage = 1;
+        let countdownActive = true;
+
+        // Floating hearts
+        function createHeart() {
+            const heart = document.createElement('div');
+            heart.className = 'heart';
+            heart.innerHTML = ['💖', '💕', '💗', '💓', '✨'][Math.floor(Math.random() * 5)];
+            heart.style.left = Math.random() * 100 + '%';
+            heart.style.animationDuration = (Math.random() * 3 + 5) + 's';
+            document.getElementById('hearts').appendChild(heart);
+            setTimeout(() => heart.remove(), 8000);
+        }
+
+        // Countdown
+        function startCountdown() {
+            let count = 10;
+            const countdownEl = document.getElementById('countdown');
+            
+            const timer = setInterval(() => {
+                countdownEl.textContent = count;
+                count--;
+                
+                if (count < 0) {
+                    clearInterval(timer);
+                    showFireworks();
+                    setTimeout(() => {
+                        goToPage2();
+                    }, 3000);
+                }
+            }, 500);
+        }
+
+        // Fireworks
+        function showFireworks() {
+            const fireworks = document.getElementById('fireworks');
+            for (let i = 0; i < 50; i++) {
+                setTimeout(() => {
+                    createFirework(fireworks);
+                }, i * 50);
+            }
+            setTimeout(() => {
+                fireworks.innerHTML = '';
+            }, 3000);
+        }
+
+        function createFirework(container) {
+            const firework = document.createElement('div');
+            firework.className = 'firework';
+            firework.style.left = Math.random() * 100 + '%';
+            firework.style.top = Math.random() * 100 + '%';
+            firework.style.background = ['#ff69b4', '#ffd700', '#00ff88', '#ff6b9d', '#a8e6cf'][Math.floor(Math.random() * 5)];
+            container.appendChild(firework);
+            setTimeout(() => firework.remove(), 2000);
+        }
+
+        // Page transitions
+        function goToPage2() {
+            document.getElementById('page1').classList.remove('active');
+            document.getElementById('page2').classList.add('active');
+            currentPage = 2;
+            
+            // Animate messages
+            setTimeout(() => document.getElementById('msg1').classList.add('animate'), 500);
+            setTimeout(() => document.getElementById('msg2').classList.add('animate'), 1000);
+            setTimeout(() => document.getElementById('msg3').classList.add('animate'), 1500);
+            setTimeout(() => document.getElementById('msg4').classList.add('animate'), 2000);
+        }
+
+        function goToPage3() {
+            document.getElementById('page2').classList.remove('active');
+            document.getElementById('page3').classList.add('active');
+            currentPage = 3;
+        }
+
+        // Gift interaction
+        function openGift() {
+            const giftBox = document.getElementById('giftBox');
+            const catGift = document.getElementById('catGift');
+            const finalMsg = document.getElementById('finalMsg');
+            
+            giftBox.classList.add('gift-open');
+            giftBox.innerHTML = '🎉';
+            
+            setTimeout(() => {
+                catGift.classList.add('show');
+                finalMsg.classList.add('show');
+            }, 500);
+        }
+
+        // Bear click (fun interaction)
+        document.getElementById('bear').onclick = function() {
+            this.innerHTML = 'ʕっ•ᴥ•ʎʋ';
+            setTimeout(() => {
+                this.innerHTML = 'ʕ•ᴥ•ʔ💕';
+            }, 500);
+        };
+
+        // Initialize
+        setInterval(createHeart, 600);
+        startCountdown();
+    </script>
+</body>
+</html>
